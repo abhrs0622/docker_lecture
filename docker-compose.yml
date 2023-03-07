@@ -1,18 +1,39 @@
 version: "3"
 services:
 
-# バックエンド
-backend:
-  container_name: backend
-  volumes:
-      
-  ports:
-      - "5000:5000"
-  # command: flask run --host 0.0.0.0 --port 5000
-  env_file:
-      -./backend/.go_env
-  environment:
-      - TZ=Asia/Tokyo
-  tty: true
-  # privileged: true
+    # フロントエンド
+    # frontend:
+    #     container_name: frontend
+    #     build: ./frontend
+    #     volumes:
+    #         - type: bind
+    #           source: ./frontend/app
+    #           target: /app
+    #     ports:
+    #         - "8080:8080"
+    #     environment:
+    #         - NODE_ENV=development
+    #     links:
+    #         - backend
+    #     stdin_open: true
+    #     tty: true
+
+    # バックエンド
+    backend:
+        container_name: backend_go_dockerlec
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+            target: dev
+        tty: true
+        stdin_open: true
+        volumes:
+            - type: bind
+              source: ./backend/app
+              target: /app
+        ports:
+            - 8080:8080
+        depends_on:
+            - database
         
+    
