@@ -1,0 +1,18 @@
+version: "3"
+services:
+
+# バックエンド
+backend:
+  container_name: backend
+  volumes:
+      
+  ports:
+      - "5000:5000"
+  # command: flask run --host 0.0.0.0 --port 5000
+  env_file:
+      -./backend/.go_env
+  environment:
+      - TZ=Asia/Tokyo
+  tty: true
+  # privileged: true
+        
