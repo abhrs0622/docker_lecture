@@ -1,23 +1,5 @@
 version: "3"
 services:
-
-    # フロントエンド
-    # frontend:
-    #     container_name: frontend
-    #     build: ./frontend
-    #     volumes:
-    #         - type: bind
-    #           source: ./frontend/app
-    #           target: /app
-    #     ports:
-    #         - "8080:8080"
-    #     environment:
-    #         - NODE_ENV=development
-    #     links:
-    #         - backend
-    #     stdin_open: true
-    #     tty: true
-
     # バックエンド
     backend:
         container_name: backend_go_dockerlec
@@ -30,10 +12,7 @@ services:
         volumes:
             - type: bind
               source: ./backend/app
-              target: /app
+              target: /src
         ports:
             - 8080:8080
-        depends_on:
-            - database
-        
     
